@@ -1,9 +1,10 @@
 const { launches, httpGetAllLaunches, abortLaunch, scheduleLaunch, existsLaunchWithId } = require("../../models/launches.model");
 const { estimatedDocumentCount } = require("../../models/launches.mongo");
+const { getPagination } = require("../../services/query");
 
 const getAllLaunches = async (req, res) => {
-
-  return res.status(200).json(await httpGetAllLaunches());
+ const {skip, limit}= getPagination(req.query);
+  return res.status(200).json(await httpGetAllLaunches(skip, limit));
 };
 
 

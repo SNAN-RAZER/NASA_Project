@@ -18,11 +18,11 @@ async function httpGetLaunches() {
   const response = await axiosInstance.get('/api/v1/showLa_unches');
   //console.log(response);
   const fetchedLaunches = await response.data;
+ 
  // console.log(fetchedLaunches)
   const sortedFetchedLaunches  =  fetchedLaunches.sort((a,b)=>{
     return a.flightNumber - b.flightNumber
   });
-  
   return sortedFetchedLaunches;
 
 

@@ -7,6 +7,7 @@ const app =require('./app');
 const { loadsPlanetData, getAllPlanetsData } = require('./models/palnets.model');
 const { error } = require('console');
 const { mongoConnect } = require('./services/mongo');
+const { getLaunchesData } = require('./models/launches.model');
 const MongoUrl = ``
 
 const server = http.createServer(app);
@@ -18,6 +19,8 @@ const server = http.createServer(app);
     await mongoConnect()
     // if( (await getAllPlanetsData()).length === 0 )
         await loadsPlanetData();
+        await getLaunchesData();
+
 
 })();
 server.listen(PORT,()=>{
