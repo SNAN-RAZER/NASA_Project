@@ -45,7 +45,8 @@ async function httpSubmitLaunch(launch) {
 async function httpAbortLaunch(id) {
   // TODO: Once API is ready.
   // Delete launch with given ID.
-  const response  = await axiosInstance.delete(`/api/v1/showLa_unches/abort-launch/${id}`);
+  console.log(id);
+  const response  = await axiosInstance.post(`/api/v1/showLa_unches/abort-launch/${id}`);
   return await response.data;
 }
 

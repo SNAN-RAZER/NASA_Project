@@ -4,6 +4,7 @@ const fs =require('fs');
 const { resourceLimits } = require('worker_threads');
 const result = [];
 const path = require('path');
+const planetModel = require('../models/planets.mongo');
 const isHabitable =(planet)=>{
   return planet['koi_disposition'] ==='CONFIRMED' 
   && planet['koi_insol'] > 0.36 
@@ -20,9 +21,15 @@ const loadsPlanetData = () =>{
       comment:"#",
       columns:true
     }))
-    .on('data',(data)=>{
+    .on('data', async(data)=>{
       if(isHabitable(data))
-      result.push(data);
+      {
+       await savePlanet(data)
+      }
+      
+     
+    
+
       
     })
     .on('error',(error)=>{
@@ -41,9 +48,27 @@ const loadsPlanetData = () =>{
     
 }
 
+const getAllPlanetsData = async() =>{
+  return await planetModel.find({},{
+    '_id':0,
+    '__v':0,
+    'updatedAt':0
+  }).sort({keplerName: -1});
+}
 
+const savePlanet = async (planet) =>{
+  try {
+    const keplerName = planet.kepler_name;
+    await planetModel.updateOne({keplerName},{keplerName},{upsert: true})
+  }
+   catch (error) {
+    console.log(error)
+  }
+}
+  
 
 module.exports = {
     loadsPlanetData,
-    planets:result
+    planets:result,
+    getAllPlanetsData
 }
