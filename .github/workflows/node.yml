@@ -15,4 +15,4 @@ jobs:
          with: 
             node-version: '20'
        - run: npm install
-       - run: npm eun build --prefix client
+       - run: npm run build --prefix client
