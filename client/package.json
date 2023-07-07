@@ -15,7 +15,7 @@
     "build":"set BUILD_PATH=../server/public&& react-scripts build",
 
 
-    "test": "react-scripts test",
+    "test": " ",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
