@@ -6,7 +6,7 @@ const path = require('path');
 const planetsRouter = require('./routes/planets/planets.router');
 const launchesRouter = require('./routes/launches/launches.router');
 app.use(cors({
-    origin:"http://localhost:3000"
+    origin:"http://localhost:*"
 }));
 app.use(express.json());
 
